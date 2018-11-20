@@ -252,6 +252,7 @@ public static void merge_sort(int[] arr) {
 }
 ```
 **5.3 Python版本**
+
 递归法：
 ```
 def merge_sort(params):
@@ -276,7 +277,8 @@ def merge_sort(params):
     result+=Left[i:]
     result+=Right[j:]
     return result
-...
+```
+
 ##### 6. 优化改进
 在规模较小时，合并排序可采用直接插入，避免递归调用；
 在写法上，可以在生成辅助数组时，俩头小，中间大，这时不需要再在后边加俩个while循环进行判断，只需一次比完。
