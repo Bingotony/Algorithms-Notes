@@ -251,7 +251,32 @@ public static void merge_sort(int[] arr) {
 	merge_sort_recursive(arr, result, 0, len - 1);
 }
 ```
-
+**5.3 Python版本**
+递归法：
+```
+def merge_sort(params):
+    length=len(params)  #将数组拆成单个元素
+    mid=length//2
+    if length==1:
+        return params
+    L1=params[:mid]
+    R1=params[mid:]
+    Left=merge_sort(L1)
+    Right=merge_sort(R1)
+    
+    result=[]
+    i=j=0
+    while len(Left)>i and len(Right)>j:  #比较单个元素，然后重组数组
+        if Left[i]<=Right[j]:
+            result.append(Left[i])
+            i+=1
+        else:
+            result.append(Right[j])
+            j+=1
+    result+=Left[i:]
+    result+=Right[j:]
+    return result
+...
 ##### 6. 优化改进
 在规模较小时，合并排序可采用直接插入，避免递归调用；
 在写法上，可以在生成辅助数组时，俩头小，中间大，这时不需要再在后边加俩个while循环进行判断，只需一次比完。
