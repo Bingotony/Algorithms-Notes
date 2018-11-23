@@ -1,0 +1,35 @@
+利用二分查找方法进行数据排序
+1.第一步，取一个要排序的数据，插入到R列表中
+2.将其他要排序的数据，依次插入R列表中，每次插入采用二分查找方式，确定插入的位置
+3.当所有要排序的数据全部插入R列表中时，数据排血完成
+
+***Python实现代码：
+def sort(params):               #排序
+    length=len(params)
+    R=[params[0]]
+    for each in range(1,length):
+        value=params[each]
+        R=divided_sort(R,value)
+        
+    return R
+
+def divided_sort(R,value):       #二分查找，插入
+    length=len(R)
+    low=0
+    high=length-1
+    while low<=high:
+        mid=(low+high)//2
+        if value==R[mid]:
+            low=mid
+            break
+        elif value<R[mid]:
+            high=mid-1
+        else:
+            low=mid+1
+
+    R.insert(low,value)
+    return R
+
+params=list(eval(input('Please enter all numbers:')))
+result=sort(params)
+print(result)
