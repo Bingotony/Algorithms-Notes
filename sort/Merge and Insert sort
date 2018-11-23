@@ -1,0 +1,48 @@
+由于归并算法在排序数据数目较大时会比插入排序更省时，而在排序数目较少时，插入排序算法比归并算法更好。
+这里结合两者的优点，将数据数目大于5的数组使用归并算法，当数目小于等于5时，使用插入算法。
+
+
+
+***Python实现代码：
+
+
+def sort_insert(params):               #插入排序
+    length=len(params)
+    for each in range(1,length):
+        key=params[each]
+        i=each-1
+        while i>=0 and params[i]>key:
+            params[i+1]=params[i]
+            i=i-1
+        params[i+1]=key
+    return params
+
+def merge_insert(params):              #归并算法的分
+    length=len(params)
+    mid=length//2
+    if length<=5 :
+        return sort_insert(params)
+    
+    L1=params[:mid]
+    R1=params[mid:]
+    left=merge_insert(L1)
+    right=merge_insert(R1)
+    return merge(left,right)
+
+def merge(left,right):                 #归并算法的合
+    result=[]
+    i=j=0
+    while len(left)>i and len(right)>j:
+        if left[i]<=right[j]:
+            result.append(left[i])
+            i+=1
+        else:
+            result.append(right[j])
+            j+=1
+    result+=left[i:]
+    result+=right[j:]
+    return result
+
+params=list(eval(input('Please enter all numbers:')))
+result=merge_insert(params)
+print(result)
